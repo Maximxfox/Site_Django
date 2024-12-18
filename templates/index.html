@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой проект</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v={% now 'U' %}">
+    <link rel="icon" href="{% static 'img/logo.png' %}">
 </head>
 <body>
     <header>
-        <a href="{% url 'index' %}">
-            <img src="{% static 'img/logo.png' %}" alt="photo" >
-        </a>
+        <img src="{% static 'img/logo.png' %}" alt="photo" >
         <h1>Профессия ""</h1>
     </header>
 

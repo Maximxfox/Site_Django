@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
 header {
@@ -11,49 +13,37 @@ header {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
-}
-
-header a {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: 0px;
-    margin-left:210px;
-    height: 100%;
+    padding: 10px 20px;
 }
 
 header img {
     width: 50px;
-    margin-left:2-0px;
-    height: auto;
-    margin: 0;
+    height: 50px;
+    position: absolute;
+    left: 210px;
 }
 
 header h1 {
     margin: 0;
-}
-
-
-a {
-    margin: 0;
+    font-size: 36px;
 }
 
 nav {
     width: 200px;
-    float: left;
     position: fixed;
     background-color: #333;
     height: 100vh;
-    padding-top: 20px;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .navigation {
     display: block;
     color: white;
-    padding: 10px;
+    padding: 15px 20px;
     text-decoration: none;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .navigation:hover {
@@ -64,15 +54,14 @@ nav {
     margin-left: 220px;
     padding: 20px;
     background-color: white;
+    min-height: 100vh;
 }
 
 footer {
-    clear: both;
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
+    padding: 10px 20px;
     width: 100%;
+    position: relative;
 }
