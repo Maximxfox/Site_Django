@@ -17,7 +17,7 @@ def find_data(data, df_currency):
     data['date'] = pd.to_datetime(data['published_at'], errors='coerce', utc=True).dt.strftime('%Y-%m')
     data['salary'] = data.apply(lambda row: row[['salary_from', 'salary_to']].mean(), axis=1)
     data['salary'] = data.apply(lambda row: find_rate(row, df_currency), axis=1)
-    data['key_skills'] = data['key_skills'].apply(lambda x: [skill.strip() for skill in str(x).split('\n')] if isinstance(x, str) else np.nan)
+    data['key_skills'] = data['key_skills'].apply(lambda x: ', '.join([skill.strip() for skill in str(x).split('\n')]) if isinstance(x, str) else np.nan)
     data['published_at'] = pd.to_datetime(data['published_at'], errors='coerce', utc=True).dt.strftime('%Y')
     return data
 

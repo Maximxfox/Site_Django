@@ -9,18 +9,22 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px 20px;
+    z-index: 1000;
 }
 
 header img {
     width: 50px;
     height: 50px;
     position: absolute;
-    left: 210px;
+    left: 10px;
 }
 
 header h1 {
@@ -31,9 +35,10 @@ header h1 {
 nav {
     width: 200px;
     position: fixed;
+    top: 60px; /* добавлено, чтобы навигация не перекрывала хедер */
     background-color: #333;
-    height: 100vh;
-    padding-top: 60px;
+    height: calc(100vh - 60px); /* минус высота хедера */
+    padding-top: 10px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -55,13 +60,82 @@ nav {
     padding: 20px;
     background-color: white;
     min-height: 100vh;
+    padding-top: 80px;
 }
 
-footer {
+.footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px 20px;
+    padding: 20px 0px 20px 210px;
     width: 100%;
     position: relative;
+}
+
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+
+table {
+    width: 25%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    display: none;
+}
+
+.carousel img.active {
+    display: block;
+}
+
+.carousel .controls {
+    margin-top: 10px;
+}
+
+.carousel button {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+.carousel button:hover {
+    background-color: #e0e0e0;
 }

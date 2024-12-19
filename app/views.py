@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import json
 from django.shortcuts import render
-from .models import Vacancy_From_HH
+from .models import *
 
 
 def index_page(request):
@@ -14,11 +14,15 @@ def stats_page(request):
 
 
 def relevance_page(request):
-    return render(request, 'relevance.html')
+    data = Job_Year_Salary.objects.all()
+    data = [{'published_at': int((float(record.published_at))), 'salary': int(record.salary)} for record in data]
+    return render(request, 'relevance.html', {'data': data})
 
 
 def geography_page(request):
-    return render(request, 'geography.html')
+    data = Job_Year_Salary.objects.all()
+    data = [{'published_at': int((float(record.published_at))), 'salary': int(record.salary)} for record in data]
+    return render(request, 'geography.html', {'data': data})
 
 
 def skills_page(request):

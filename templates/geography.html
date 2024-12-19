@@ -7,10 +7,13 @@
     <title>Мой проект</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}?v={% now 'U' %}">
     <link rel="icon" href="{% static 'img/logo.png' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 </head>
 <body>
     <header>
-        <img src="{% static 'img/logo.png' %}" alt="photo" >
+        <img src="{% static 'img/logo.png' %}" alt="photo">
         <h1>Профессия ""</h1>
     </header>
 
@@ -26,10 +29,49 @@
     <div class="content">
         <h2>Добро пожаловать на сайт!</h2>
         <p>Здесь будет основное содержание страницы.</p>
+
+        <!-- Statistics Table -->
+        <h3>Статистика по годам</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Год</th>
+                    <th>Зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in data %}
+                <tr>
+                    <td>{{ record.published_at }}</td>
+                    <td>{{ record.salary }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Image Carousel -->
+<!--        <h3>Фотографии</h3>-->
+<!--        <div class="carousel">-->
+<!--            <div><img src="{% static 'img/logo.png' %}" alt="photo1"></div>-->
+<!--            <div><img src="{% static 'img/logo.png' %}" alt="photo2"></div>-->
+<!--            <div><img src="{% static 'img/logo.png' %}" alt="photo3"></div>-->
+<!--        </div>-->
     </div>
 
     <footer>
         <p>ФИО: Авдеенко Максим Анатольевич | Академическая группа: РИ-230931</p>
     </footer>
+
+    <script>
+        $(document).ready(function(){
+            $('.carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true
+            });
+        });
+    </script>
 </body>
 </html>

@@ -3,14 +3,60 @@ from django.db import models
 
 class Job(models.Model):
     name = models.CharField(max_length=255)
-    key_skills = models.TextField()
-    salary= models.FloatField(null=True, blank=True)
+    key_skills = models.CharField(max_length=1000, null=True, blank=True)
+    salary = models.FloatField(null=True, blank=True)
     area_name = models.CharField(max_length=255)
     published_at = models.CharField(max_length=4)
 
 
     class Meta:
         db_table = 'job'
+
+
+class Job_Year_Salary(models.Model):
+    salary = models.FloatField()
+    published_at = models.CharField(max_length=4)
+
+
+    class Meta:
+        db_table = 'year_salary'
+
+
+class Job_Year_Count(models.Model):
+    count = models.IntegerField()
+    published_at = models.CharField(max_length=4)
+
+
+    class Meta:
+        db_table = 'year_count'
+
+
+class Job_Area_Salary(models.Model):
+    salary = models.FloatField(null=True, blank=True)
+    area_name = models.CharField(max_length=255)
+
+
+    class Meta:
+        db_table = 'area_salary'
+
+
+class Job_Area_Count(models.Model):
+    count = models.FloatField(null=True, blank=True)
+    area_name = models.CharField(max_length=255)
+
+
+    class Meta:
+        db_table = 'area_count'
+
+
+class Job_Skills(models.Model):
+    count = models.IntegerField()
+    key_skill = models.CharField(max_length=100)
+    published_at = models.CharField(max_length=4)
+
+
+    class Meta:
+        db_table = 'skills'
 
 
 class Vacancy_From_HH(models.Model):
