@@ -10,8 +10,8 @@
 </head>
 <body>
     <header>
-        <img src="{% static 'img/logo.png' %}" alt="photo" >
-        <h1>Профессия ""</h1>
+        <img src="{% static 'img/logo.png' %}" alt="photo">
+        <h1>PHP-программист</h1>
     </header>
 
     <nav>
@@ -20,12 +20,148 @@
         <a class="navigation" href="{% url 'relevance' %}">Востребованность</a>
         <a class="navigation" href="{% url 'geography' %}">География</a>
         <a class="navigation" href="{% url 'skills' %}">Навыки</a>
-        <a class="navigation" href="{% url 'last_vacancies' %}">Последние вакансии</a>
+         <a class="navigation" href="{% url 'last_vacancies' %}">Последние вакансии</a>
     </nav>
 
     <div class="content">
-        <h2>Добро пожаловать на сайт!</h2>
-        <p>Здесь будет основное содержание страницы.</p>
+        <h2>Общая статистика</h2>
+        <div class="flex-container">
+           <div class="table-container">
+              <h3>Зарплата по годам</h3>
+              <table>
+                    <thead>
+                        <tr>
+                            <th>Год</th>
+                            <th>Зарплата</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in salary_year %}
+                        <tr>
+                            <td>{{ record.published_at }}</td>
+                            <td>{{ record.salary }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+              </table>
+           </div>
+           <div class="carousel-container">
+                    <img src="{{ photo_salary_year.0.image.url }}" alt="{{ photo_salary_year.0.title }}">
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <div class="table-container">
+                <h3>Количество вакансий по годам</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Год</th>
+                        <th>Количество</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for record in count_year %}
+                        <tr>
+                            <td>{{ record.published_at }}</td>
+                            <td>{{ record.count }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+             <div class="carousel-container">
+                    <img src="{{ photo_count_year.0.image.url }}" alt="{{ photo_count_year.0.title }}">
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <div class="table-container">
+                <h3>Зарплата по городам</h3>
+                 <table>
+                        <thead>
+                        <tr>
+                            <th>Город</th>
+                            <th>Зарплата</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for record in salary_area %}
+                            <tr>
+                                <td>{{ record.area_name }}</td>
+                                <td>{{ record.salary }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+             <div class="carousel-container">
+                     <img src="{{ photo_salary_area.0.image.url }}" alt="{{ photo_salary_area.0.title }}">
+            </div>
+        </div>
+
+        <div class="flex-container">
+             <div class="table-container">
+                  <h3>Количество вакансий по городам</h3>
+                   <table>
+                        <thead>
+                        <tr>
+                            <th>Город</th>
+                            <th>Количество</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                         {% for record in count_area %}
+                            <tr>
+                                <td>{{ record.area_name }}</td>
+                                <td>{{ record.count }}</td>
+                            </tr>
+                         {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+             <div class="carousel-container">
+                   <img src="{{ photo_count_area.0.image.url }}" alt="{{ photo_count_area.0.title }}">
+            </div>
+        </div>
+          <div class="flex-container">
+              <div class="table-container">
+                   <form method="get">
+                        <label for="year_select">Выберите год:</label>
+                        <select name="published_at" id="year_select">
+                            {% for year in all_years %}
+                            <option value="{{ year }}"
+                                    {% if year == selected_year %}
+                                    selected
+                                    {% endif %}>
+                               {{ year }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Показать</button>
+                    </form>
+                   <h3>Навыки за {{ selected_year }} год</h3>
+                   <table>
+                    <thead>
+                         <tr>
+                            <th>Навык</th>
+                            <th>Количество</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for skill in skills %}
+                            <tr>
+                                <td>{{ skill.key_skill }}</td>
+                                <td>{{ skill.count }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+              </div>
+               <div class="carousel-container">
+                    <img src="{{ photo_skills.0.image.url }}" alt="{{ photo_skills.0.title }}">
+                </div>
+          </div>
     </div>
 
     <footer>

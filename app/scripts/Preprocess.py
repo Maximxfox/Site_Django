@@ -31,10 +31,12 @@ def update(data, output_file):
 def main():
     df_currency = pd.read_csv('csv_data/currency.csv', index_col='date')
     csv_merged = pd.read_csv('csv_data/vacancies_2024.csv')
-    php_keywords = ['php', 'пхп', 'рнр']
-    csv_merged = csv_merged[csv_merged['name'].str.contains('|'.join(php_keywords), case=False)]
     csv_merged = find_data(csv_merged, df_currency)
     output_file = 'csv_data/updated_vacancies.csv'
+    update(csv_merged, output_file)
+    php_keywords = ['php', 'пхп', 'рнр']
+    csv_merged = csv_merged[csv_merged['name'].str.contains('|'.join(php_keywords), case=False)]
+    output_file = 'csv_data/updated_vacancies_php.csv'
     update(csv_merged, output_file)
 
 

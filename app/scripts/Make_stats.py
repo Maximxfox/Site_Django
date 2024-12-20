@@ -4,19 +4,19 @@ import numpy as np
 
 
 def find_salary_by_year(df):
-    salary_by_year = df.groupby('published_at')['salary'].mean().reset_index()
+    salary_by_year = df.groupby('published_at')['salary'].mean().reset_index().astype(int)
     return salary_by_year
 
 
 def make_img_salary_by_year(salary_by_year):
     plt.figure(figsize=(15, 10))
-    plt.plot(salary_by_year.index, salary_by_year.values, marker='o', linestyle='-', color='b')
+    plt.plot(salary_by_year['published_at'], salary_by_year['salary'], marker='o', linestyle='-', color='b')
     plt.title('Динамика уровня зарплат по годам (в рублях)', fontsize=14)
     plt.xlabel('Год', fontsize=12)
     plt.ylabel('Средняя зарплата (руб.)', fontsize=12)
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig('app/scripts/relevance/salary.png')
+    plt.savefig('relevance/general_salary.png')
 
 
 
@@ -27,51 +27,66 @@ def find_vacancies_by_year(df):
 
 def make_img_vacancies_by_year(vacancies_by_year):
     plt.figure(figsize=(15, 10))
-    plt.plot(vacancies_by_year.index, vacancies_by_year.values, marker='o', linestyle='-', color='g')
+    plt.plot(vacancies_by_year['published_at'], vacancies_by_year['name'], marker='o', linestyle='-', color='g')
     plt.title('Динамика количества вакансий по годам', fontsize=14)
     plt.xlabel('Год', fontsize=12)
     plt.ylabel('Количество вакансий', fontsize=12)
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig('app/scripts/relevance/count.png')
+    plt.savefig('relevance/general_count.png')
 
 
 def find_salary_by_city(df):
-    salary_by_city = df.groupby('area_name')['salary'].mean()
-    salary_by_city = salary_by_city.sort_values(ascending=False)[:100].reset_index()
-    return salary_by_city
+    total_vacancies = len(df)
+    salary_area = (
+        df
+        .groupby('area_name')
+        .agg({'salary': 'mean', 'name': 'count'})
+        .assign(perc=lambda df: df['name'] / total_vacancies)
+        .sort_values(['salary', 'area_name'], ascending=[False, True])
+        .query('perc >= 0.01')
+        .astype(int)
+        .reset_index()
+    )
+    return salary_area
 
 
 def make_img_salary_by_city(salary_by_city):
     plt.figure(figsize=(15, 10))
-    salary_by_city.plot(kind='bar', color='b')
+    plt.bar(salary_by_city['area_name'], salary_by_city['salary'], color='b', width=0.5)
     plt.title('Уровень зарплат по городам (в рублях)', fontsize=14)
     plt.xlabel('Город', fontsize=12)
     plt.ylabel('Средняя зарплата (руб.)', fontsize=12)
     plt.xticks(rotation=90)
-    plt.grid(True)
     plt.tight_layout()
-    plt.savefig('app/scripts/geography/salary.png')
+    plt.savefig('geography/salary.png')
 
 
 def find_vacancies_by_city(df):
-    vacancies_by_city = df.groupby('area_name')['name'].count()
-    total_vacancies = vacancies_by_city.sum()
-    vacancies_by_city = vacancies_by_city / total_vacancies
-    vacancies_by_city = vacancies_by_city.sort_values(ascending=False)[:100].reset_index()
+    total_vacancies = len(df)
+    vacancies_by_city = (
+        df
+        .groupby('area_name')
+        .agg({'name': 'count'})
+        .assign(perc=lambda df: df['name'] / total_vacancies)
+        .round(4)
+        .sort_values(['perc', 'area_name'], ascending=[False, True])
+        .query('perc >= 0.01')
+        .reset_index()
+    )
     return vacancies_by_city
 
 
 def make_img_vacancies_by_city(vacancies_by_city):
     plt.figure(figsize=(15, 10))
-    vacancies_by_city.plot(kind='bar', color='g')
+    plt.bar(vacancies_by_city['area_name'], vacancies_by_city['perc'], color='g', width=0.5)
     plt.title('Доля вакансий по городам', fontsize=14)
     plt.xlabel('Город', fontsize=12)
     plt.ylabel('Доля вакансий', fontsize=12)
     plt.xticks(rotation=90)
-    plt.grid(True)
     plt.tight_layout()
-    plt.savefig('app/scripts/geography/count.png')
+    plt.savefig('geography/general_count.png')
+
 
 
 def parse_skills(x):
@@ -106,4 +121,4 @@ def make_img_skills_by_year(skills_by_year):
         plt.xlabel('Востребованность')
         plt.ylabel('Навыки')
         plt.tight_layout()
-        plt.savefig(f'top-20/{year}.png')
+        plt.savefig(f'top-20/general_{year}.png')

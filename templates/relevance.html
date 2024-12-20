@@ -11,7 +11,7 @@
 <body>
     <header>
         <img src="{% static 'img/logo.png' %}" alt="photo">
-        <h1>Профессия ""</h1>
+        <h1>PHP-программист</h1>
     </header>
 
     <nav>
@@ -24,12 +24,9 @@
     </nav>
 
     <div class="content">
-        <h2>Добро пожаловать на сайт!</h2>
-        <p>Здесь будет основное содержание страницы.</p>
-
         <div class="flex-container">
             <div class="table-container">
-                <h3>Статистика по годам</h3>
+                <h3>Зарплата по годам</h3>
                 <table>
                     <thead>
                         <tr>
@@ -38,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for record in data %}
+                        {% for record in salary %}
                         <tr>
                             <td>{{ record.published_at|floatformat:"0" }}</td>
                             <td>{{ record.salary }}</td>
@@ -49,12 +46,36 @@
             </div>
 
             <div class="carousel-container">
-                <h3>Фотографии</h3>
-                <div class="carousel">
-                    <div><img src="{% static 'img/logo.png' %}" alt="photo1"></div>
-                    <div><img src="{% static 'img/logo.png' %}" alt="photo2"></div>
-                    <div><img src="{% static 'img/logo.png' %}" alt="photo3"></div>
-                </div>
+                 <div>
+                    <img src="{{ photo_salary.0.image.url }}" alt="{{ photo_salary.0.title }}">
+                 </div>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div class="table-container">
+                <h3>Количество по годам</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Год</th>
+                            <th>Зарплата</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in count %}
+                        <tr>
+                            <td>{{ record.published_at|floatformat:"0" }}</td>
+                            <td>{{ record.count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                 <div>
+                    <img src="{{ photo_count.0.image.url }}" alt="{{ photo_count.0.title }}">
+                 </div>
             </div>
         </div>
     </div>
