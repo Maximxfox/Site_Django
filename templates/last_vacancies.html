@@ -10,38 +10,71 @@
 </head>
 <body>
     <header>
-        <img src="{% static 'img/logo.png' %}" alt="photo" >
+        <img class='logo' src="{% static 'img/logo.png' %}" alt="photo" >
         <h1>PHP-программист</h1>
     </header>
 
     <nav>
-        <a class="navigation" href="{% url 'index' %}">Главная</a>
-        <a class="navigation" href="{% url 'stats' %}">Общая статистика</a>
-        <a class="navigation" href="{% url 'relevance' %}">Востребованность</a>
-        <a class="navigation" href="{% url 'geography' %}">География</a>
-        <a class="navigation" href="{% url 'skills' %}">Навыки</a>
-        <a class="navigation" href="{% url 'last_vacancies' %}">Последние вакансии</a>
+        <a class="navigation" href="{% url 'index' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Главная</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'stats' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Общая статистика</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'relevance' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Востребованность</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'geography' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>География</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'skills' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Навыки</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'last_vacancies' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Последние вакансии</p>
+            </div>
+        </a>
     </nav>
 
     <div class="content">
-        <h2>Последние 10 вакансий</h2>
-        <ul>
+        <h2 class="heading">Последние 10 вакансий</h2>
+        <ul class="vacancy">
             {% for vacancy in vacancies %}
                 <li>
-                    <h3>{{ vacancy.name }}</h3>
-                    <p>{{ vacancy.description|safe }}</p>
-                    <p><strong>Навыки:</strong> {{ vacancy.skills }}</p>
-                    <p><strong>Компания:</strong> {{ vacancy.company }}</p>
-                    <p><strong>Оклад:</strong> {{ vacancy.salary }}</p>
-                    <p><strong>Регион:</strong> {{ vacancy.area }}</p>
-                    <p><strong>Дата публикации:</strong> {{ vacancy.published_at }}</p>
+                    <h2 class="vac_h">{{ vacancy.name }}</h2>
+                    <div class="one_vac">
+                        <p>{{ vacancy.description|safe }}</p>
+                        <p><strong>Навыки:</strong> {{ vacancy.skills }}</p>
+                        <p><strong>Компания:</strong> {{ vacancy.company }}</p>
+                        <p><strong>Оклад:</strong> {{ vacancy.salary }}</p>
+                        <p><strong>Регион:</strong> {{ vacancy.area }}</p>
+                        <p><strong>Дата публикации:</strong> {{ vacancy.published_at }}</p>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
     </div>
 
     <footer>
-        <p>ФИО: Авдеенко Максим Анатольевич | Академическая группа: РИ-230931</p>
+        <p>Авдеенко Максим Анатольевич</p>
+        <p>Академическая группа: РИ-230931</p>
     </footer>
 </body>
 </html>

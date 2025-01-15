@@ -10,162 +10,206 @@
 </head>
 <body>
     <header>
-        <img src="{% static 'img/logo.png' %}" alt="photo">
+        <img class='logo' src="{% static 'img/logo.png' %}" alt="photo" >
         <h1>PHP-программист</h1>
     </header>
 
     <nav>
-        <a class="navigation" href="{% url 'index' %}">Главная</a>
-        <a class="navigation" href="{% url 'stats' %}">Общая статистика</a>
-        <a class="navigation" href="{% url 'relevance' %}">Востребованность</a>
-        <a class="navigation" href="{% url 'geography' %}">География</a>
-        <a class="navigation" href="{% url 'skills' %}">Навыки</a>
-         <a class="navigation" href="{% url 'last_vacancies' %}">Последние вакансии</a>
+        <a class="navigation" href="{% url 'index' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Главная</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'stats' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Общая статистика</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'relevance' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Востребованность</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'geography' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>География</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'skills' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Навыки</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'last_vacancies' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Последние вакансии</p>
+            </div>
+        </a>
     </nav>
 
     <div class="content">
-        <h2>Общая статистика</h2>
-        <div class="flex-container">
-           <div class="table-container">
-              <h3>Зарплата по годам</h3>
-              <table>
-                    <thead>
-                        <tr>
-                            <th>Год</th>
-                            <th>Зарплата</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for record in salary_year %}
-                        <tr>
-                            <td>{{ record.published_at }}</td>
-                            <td>{{ record.salary }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-              </table>
-           </div>
-           <div class="carousel-container">
-                    <img src="{{ photo_salary_year.0.image.url }}" alt="{{ photo_salary_year.0.title }}">
-            </div>
-        </div>
-
-        <div class="flex-container">
-            <div class="table-container">
-                <h3>Количество вакансий по годам</h3>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Год</th>
-                        <th>Количество</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for record in count_year %}
-                        <tr>
-                            <td>{{ record.published_at }}</td>
-                            <td>{{ record.count }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-             <div class="carousel-container">
-                    <img src="{{ photo_count_year.0.image.url }}" alt="{{ photo_count_year.0.title }}">
-            </div>
-        </div>
-
-        <div class="flex-container">
-            <div class="table-container">
-                <h3>Зарплата по городам</h3>
-                 <table>
+        <h2 class="heading">Общая статистика</h2>
+        <div class="substats">
+            <h2>Зарплата по годам</h2>
+            <div class="flex-container">
+                <div>
+                    <table>
                         <thead>
-                        <tr>
-                            <th>Город</th>
-                            <th>Зарплата</th>
-                        </tr>
+                            <tr>
+                                <th>Год</th>
+                                <th>Зарплата</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {% for record in salary_area %}
+                            {% for record in salary_year %}
                             <tr>
-                                <td>{{ record.area_name }}</td>
+                                <td>{{ record.published_at|floatformat:"0" }}</td>
                                 <td>{{ record.salary }}</td>
                             </tr>
-                        {% endfor %}
+                            {% endfor %}
                         </tbody>
                     </table>
-            </div>
-             <div class="carousel-container">
-                     <img src="{{ photo_salary_area.0.image.url }}" alt="{{ photo_salary_area.0.title }}">
+                </div>
+
+                <div>
+                    <div class="photo">
+                        <img class='photo_stats' src="{{ photo_salary_year.0.image.url }}" alt="{{ photo_salary_year.0.title }}">
+                     </div>
+                </div>
             </div>
         </div>
-
-        <div class="flex-container">
-             <div class="table-container">
-                  <h3>Количество вакансий по городам</h3>
-                   <table>
+        <div class="substats">
+            <h2>Количество по годам</h2>
+            <div class="flex-container">
+                <div>
+                    <table>
                         <thead>
-                        <tr>
-                            <th>Город</th>
-                            <th>Количество</th>
-                        </tr>
+                            <tr>
+                                <th>Год</th>
+                                <th>Количество</th>
+                            </tr>
                         </thead>
                         <tbody>
-                         {% for record in count_area %}
+                            {% for record in count_year %}
+                            <tr>
+                                <td>{{ record.published_at|floatformat:"0" }}</td>
+                                <td>{{ record.count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="photo">
+                    <img class='photo_stats' src="{{ photo_count_year.0.image.url }}" alt="{{ photo_count_year.0.title }}">
+                </div>
+            </div>
+        </div>
+        <div class="substats">
+            <h2>Зарплата по Городам</h2>
+            <div class="flex-container">
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Город/Страна</th>
+                                    <th>Зарплата</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for record in salary_area %}
+                                <tr>
+                                    <td>{{ record.area_name }}</td>
+                                    <td>{{ record.salary }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="photo">
+                        <img class='photo_stats' src="{{ photo_salary_area.0.image.url }}" alt="{{ photo_salary_area.0.title }}">
+                    </div>
+            </div>
+        </div>
+        <div class="substats">
+            <h2>Доля вакансий по Городам</h2>
+            <div class="flex-container">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Город</th>
+                                <th>Доля вакансий</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in count_area %}
                             <tr>
                                 <td>{{ record.area_name }}</td>
                                 <td>{{ record.count }}</td>
                             </tr>
-                         {% endfor %}
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
-             <div class="carousel-container">
-                   <img src="{{ photo_count_area.0.image.url }}" alt="{{ photo_count_area.0.title }}">
+
+                <div class="photo">
+                    <img class='photo_stats' src="{{ photo_count_area.0.image.url }}" alt="{{ photo_count_area.0.title }}">
+                </div>
             </div>
         </div>
-          <div class="flex-container">
-              <div class="table-container">
-                   <form method="get">
-                        <label for="year_select">Выберите год:</label>
-                        <select name="published_at" id="year_select">
-                            {% for year in all_years %}
-                            <option value="{{ year }}"
-                                    {% if year == selected_year %}
-                                    selected
-                                    {% endif %}>
-                               {{ year }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                        <button type="submit">Показать</button>
-                    </form>
-                   <h3>Навыки за {{ selected_year }} год</h3>
-                   <table>
-                    <thead>
-                         <tr>
-                            <th>Навык</th>
-                            <th>Количество</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for skill in skills %}
+        <form method="get">
+            <label for="year_select">Выберите год:</label>
+            <select name="published_at" id="year_select">
+                {% for year in all_years %}
+                <option value="{{ year }}"
+                        {% if year == selected_year %}
+                        selected
+                        {% endif %}>
+                   {{ year }}
+                </option>
+               {% endfor %}
+            </select>
+            <button type="submit">Показать</button>
+        </form>
+        <div class="substats">
+            <h2>Навыки за {{ selected_year }} год</h2>
+            <div class="flex-container">
+                <div>
+                     <table>
+                        <thead>
                             <tr>
-                                <td>{{ skill.key_skill }}</td>
-                                <td>{{ skill.count }}</td>
+                                <th>Навык</th>
+                                <th>Количество</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            {% for skill in skills %}
+                                <tr>
+                                    <td>{{ skill.key_skill }}</td>
+                                    <td>{{ skill.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
-              </div>
-               <div class="carousel-container">
-                    <img src="{{ photo_skills.0.image.url }}" alt="{{ photo_skills.0.title }}">
                 </div>
-          </div>
+                <div class="photo">
+                    <img class='photo_stats' src="{{ photo_skills.0.image.url }}" alt="{{ photo_skills.0.title }}">
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>ФИО: Авдеенко Максим Анатольевич | Академическая группа: РИ-230931</p>
+        <p>Авдеенко Максим Анатольевич</p>
+        <p>Академическая группа: РИ-230931</p>
     </footer>
 </body>
 </html>

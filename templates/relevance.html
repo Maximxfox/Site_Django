@@ -10,78 +10,112 @@
 </head>
 <body>
     <header>
-        <img src="{% static 'img/logo.png' %}" alt="photo">
+        <img class='logo' src="{% static 'img/logo.png' %}" alt="photo" >
         <h1>PHP-программист</h1>
     </header>
 
     <nav>
-        <a class="navigation" href="{% url 'index' %}">Главная</a>
-        <a class="navigation" href="{% url 'stats' %}">Общая статистика</a>
-        <a class="navigation" href="{% url 'relevance' %}">Востребованность</a>
-        <a class="navigation" href="{% url 'geography' %}">География</a>
-        <a class="navigation" href="{% url 'skills' %}">Навыки</a>
-        <a class="navigation" href="{% url 'last_vacancies' %}">Последние вакансии</a>
+        <a class="navigation" href="{% url 'index' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Главная</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'stats' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Общая статистика</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'relevance' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Востребованность</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'geography' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>География</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'skills' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Навыки</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'last_vacancies' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Последние вакансии</p>
+            </div>
+        </a>
     </nav>
 
     <div class="content">
-        <div class="flex-container">
-            <div class="table-container">
-                <h3>Зарплата по годам</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Год</th>
-                            <th>Зарплата</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for record in salary %}
-                        <tr>
-                            <td>{{ record.published_at|floatformat:"0" }}</td>
-                            <td>{{ record.salary }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <h2 class="heading">Cтатистика PHP-разработчика</h2>
+        <div class="substats">
+            <h2>Зарплата по годам</h2>
+            <div class="flex-container">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Год</th>
+                                <th>Зарплата</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in salary %}
+                            <tr>
+                                <td>{{ record.published_at|floatformat:"0" }}</td>
+                                <td>{{ record.salary }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-            <div class="carousel-container">
-                 <div>
-                    <img src="{{ photo_salary.0.image.url }}" alt="{{ photo_salary.0.title }}">
-                 </div>
+                <div>
+                    <div class="photo">
+                        <img class='photo_stats' src="{{ photo_salary.0.image.url }}" alt="{{ photo_salary.0.title }}">
+                     </div>
+                </div>
             </div>
         </div>
-        <div class="flex-container">
-            <div class="table-container">
-                <h3>Количество по годам</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Год</th>
-                            <th>Зарплата</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for record in count %}
-                        <tr>
-                            <td>{{ record.published_at|floatformat:"0" }}</td>
-                            <td>{{ record.count }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <div class="substats">
+            <h2>Количество по годам</h2>
+            <div class="flex-container">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Год</th>
+                                <th>Количество</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in count %}
+                            <tr>
+                                <td>{{ record.published_at|floatformat:"0" }}</td>
+                                <td>{{ record.count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-            <div>
-                 <div>
-                    <img src="{{ photo_count.0.image.url }}" alt="{{ photo_count.0.title }}">
-                 </div>
+                <div class="photo">
+                    <img class='photo_stats' src="{{ photo_count.0.image.url }}" alt="{{ photo_count.0.title }}">
+                </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>ФИО: Авдеенко Максим Анатольевич | Академическая группа: РИ-230931</p>
+        <p>Авдеенко Максим Анатольевич</p>
+        <p>Академическая группа: РИ-230931</p>
     </footer>
 </body>
 </html>

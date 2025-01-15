@@ -10,63 +10,96 @@
 </head>
 <body>
     <header>
-        <img src="{% static 'img/logo.png' %}" alt="photo">
+        <img class='logo' src="{% static 'img/logo.png' %}" alt="photo" >
         <h1>PHP-программист</h1>
     </header>
 
     <nav>
-        <a class="navigation" href="{% url 'index' %}">Главная</a>
-        <a class="navigation" href="{% url 'stats' %}">Общая статистика</a>
-        <a class="navigation" href="{% url 'relevance' %}">Востребованность</a>
-        <a class="navigation" href="{% url 'geography' %}">География</a>
-        <a class="navigation" href="{% url 'skills' %}">Навыки</a>
-        <a class="navigation" href="{% url 'last_vacancies' %}">Последние вакансии</a>
-    </nav>
-    <div class="content">
-        <div class="flex-container">
-            <div class="table-container">
-                <form method="get">
-                    <label for="year_select">Выберите год:</label>
-                    <select name="published_at" id="year_select">
-                        {% for year in all_years %}
-                        <option value="{{ year }}"
-                                {% if year == selected_year %}
-                                selected
-                                {% endif %}>
-                           {{ year }}
-                        </option>
-                       {% endfor %}
-                    </select>
-                    <button type="submit">Показать</button>
-                </form>
-                <h2>Навыки за {{ selected_year }} год</h2>
-                 <table>
-                    <thead>
-                        <tr>
-                            <th>Навык</th>
-                            <th>Количество</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for skill in skills %}
-                            <tr>
-                                <td>{{ skill.key_skill }}</td>
-                                <td>{{ skill.count }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+        <a class="navigation" href="{% url 'index' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Главная</p>
             </div>
-            <div class="carousel-container">
-                 <div>
-                    <img src="{{ photo.0.image.url }}" alt="{{ photo.0.title }}">
-                 </div>
+        </a>
+        <a class="navigation" href="{% url 'stats' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Общая статистика</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'relevance' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Востребованность</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'geography' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>География</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'skills' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Навыки</p>
+            </div>
+        </a>
+        <a class="navigation" href="{% url 'last_vacancies' %}">
+            <div class="arrow_text">
+                <img class='arrow' src="{% static 'img/arrow.png' %}" alt="стрелка">
+                <p>Последние вакансии</p>
+            </div>
+        </a>
+    </nav>
+
+    <div class="content">
+        <h2 class="heading">Навыки</h2>
+        <form method="get">
+            <label for="year_select">Выберите год:</label>
+            <select name="published_at" id="year_select">
+                {% for year in all_years %}
+                <option value="{{ year }}"
+                        {% if year == selected_year %}
+                        selected
+                        {% endif %}>
+                   {{ year }}
+                </option>
+               {% endfor %}
+            </select>
+            <button type="submit">Показать</button>
+        </form>
+        <div class="substats">
+            <h2>Навыки за {{ selected_year }} год</h2>
+            <div class="flex-container">
+                <div>
+                     <table>
+                        <thead>
+                            <tr>
+                                <th>Навык</th>
+                                <th>Количество</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for skill in skills %}
+                                <tr>
+                                    <td>{{ skill.key_skill }}</td>
+                                    <td>{{ skill.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="photo">
+                    <img class='photo_stats' src="{{ photo.0.image.url }}" alt="{{ photo.0.title }}">
+                </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>ФИО: Авдеенко Максим Анатольевич | Академическая группа: РИ-230931</p>
+        <p>Авдеенко Максим Анатольевич</p>
+        <p>Академическая группа: РИ-230931</p>
     </footer>
 </body>
 </html>

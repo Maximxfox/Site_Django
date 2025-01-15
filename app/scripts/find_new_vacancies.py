@@ -37,8 +37,6 @@ def process_vacancies(vacancies):
             salary_from = item['salary']['from']
             salary_to = item['salary']['to']
             salary = calculate_average_salary(salary_from, salary_to)
-        else:
-            salary = 'Не указано'
         vacancy = {
             "Название вакансии": item['name'],
             "Описание": details.get('description', ''),
@@ -66,10 +64,4 @@ def main():
     response = requests.get(BASE_URL, params=params)
     data = response.content.decode()
     vacancies = json.loads(data)
-    vacancy_list = process_vacancies(vacancies)
-    for vacancy in vacancy_list:
-        print(vacancy)
-
-
-if __name__ == '__main__':
-    main()
+    return process_vacancies(vacancies)
